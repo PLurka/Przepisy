@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_przepisy" default="compile.module.przepisy">
+  <dirname property="module.przepisy.basedir" file="${ant.file.module_przepisy}"/>
+  
+  <property name="module.jdk.home.przepisy" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.przepisy" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.przepisy" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.przepisy" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="przepisy.output.dir" value="undefined"/>
+  <property name="przepisy.testoutput.dir" value="undefined"/>
+  
+  <path id="przepisy.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="przepisy.module.production.classpath"/>
+  
+  <path id="przepisy.runtime.production.module.classpath"/>
+  
+  <path id="przepisy.module.classpath"/>
+  
+  <path id="przepisy.runtime.module.classpath"/>
+  
+  
+  <patternset id="excluded.from.module.przepisy">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.przepisy">
+    <patternset refid="excluded.from.module.przepisy"/>
+  </patternset>
+  
+  
+  <target name="compile.module.przepisy" depends="compile.module.przepisy.production,compile.module.przepisy.tests" description="Compile module Przepisy"/>
+  
+  <target name="compile.module.przepisy.production" depends="register.custom.compilers" description="Compile module Przepisy; production classes"/>
+  
+  <target name="compile.module.przepisy.tests" depends="register.custom.compilers,compile.module.przepisy.production" description="compile module Przepisy; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.przepisy" description="cleanup module">
+    <delete dir="${przepisy.output.dir}"/>
+    <delete dir="${przepisy.testoutput.dir}"/>
+  </target>
+</project>
